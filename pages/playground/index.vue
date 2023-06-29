@@ -8,12 +8,14 @@
 
     <Colors />
     <Typography />
+    <InteractiveElements />
   </div>
 </template>
 
 <script setup lang="ts">
 import Colors from "~/components/design-system/Colors.vue"
 import Typography from "~/components/design-system/Typography.vue"
+import InteractiveElements from "~/components/design-system/InteractiveElements.vue"
 </script>
 
 <style scoped lang="scss">

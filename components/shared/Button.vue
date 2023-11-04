@@ -1,37 +1,40 @@
 <template>
-  <div class="button" :style="[buttonColor, buttonSize]">
+  <div class="button" :class="[buttonColor, buttonSize]">
     <slot />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { TButtonType, TButtonSize } from "@/types/index"
+import { computed } from "vue";
+//@ts-ignore
+import { TButtonType, TButtonSize } from "@/types";
 
-const { type, size } = defineProps<{ type?: TButtonType, size?: TButtonSize }>()
+const { type, size, padding } = defineProps<{
+  type?: TButtonType;
+  size?: TButtonSize;
+  padding?: string;
+}>();
 
 const buttonColor = computed<string>(() => {
-  if (type === 'Secondary') return 'background-color: #635FC71A; color: #635FC7'
-  if (type === 'Destructive') return 'background-color: #EA5555; color: #FFFFFF'
-  else return 'background-color: #635FC7; color: #FFFFFF'
-})
+  if (type === "Secondary") {
+    return "bg-[#635FC71A]";
+  } else if (type === "Destructive") {
+    return "bg-red text-white";
+  } else {
+    return "bg-purpleMain text-white";
+  }
+});
 
 const buttonSize = computed<string>(() => {
-  if (size === 'S') return 'padding: 10px 50px;'
-  else return 'padding: 15px 60px;'
-})
+  if (padding) return `p-[${padding}]`;
+  else if (size === "S") return "py-[10px] px-[50px]";
+  else return "py-[15px] px-[60px]";
+});
 </script>
 
 <style scoped lang="scss">
 .button {
-  display: inline-block;
-  background-color: #635FC7;
-  color: #fff;
-  border-radius: 24px;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 19px;
-  cursor: pointer;
+  @apply w-fit rounded-[24px] font-bold text-[15px] leading-[19px] cursor-pointer;
 
   &:hover {
     opacity: 0.8;

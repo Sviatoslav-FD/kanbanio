@@ -37,7 +37,7 @@ const textColor = computed<string>(() => {
 <style scoped lang="scss">
 .color-item {
   &__hex {
-    color: #FFF;
+    color: var(--color-white);
     font-weight: 700;
     padding: 45px 168px 16px 16px;
     border-radius: 6px;
@@ -47,7 +47,7 @@ const textColor = computed<string>(() => {
     margin-top: 16px;
 
     &--title {
-      color: #828FA3;
+      color: var(--color-grey-medium);
       margin-right: 36px;
     }
   }

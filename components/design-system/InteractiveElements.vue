@@ -39,9 +39,9 @@
 import { ref } from 'vue'
 import { ICheckbox } from '@/types'
 
-import DesingSystemWrapper from "~/components/design-system/DesignSystemWrapper.vue"
-import Button from "~/components/shared/Button.vue"
-import Checkbox from "~/components/shared/Checkbox.vue"
+import DesingSystemWrapper from "@/components/design-system/DesignSystemWrapper.vue"
+import Button from "@/components/shared/Button.vue"
+import Checkbox from "@/components/shared/Checkbox.vue"
 
 const subtasks = ref<ICheckbox[]>([{
   id: 0,
@@ -60,7 +60,7 @@ const subtasks = ref<ICheckbox[]>([{
     font-size: 18px;
     font-weight: 700;
     line-height: 23px;
-    color: #828FA3;
+    color: var(--color-grey-medium);
     padding-top: 40px;
   }
 
@@ -73,7 +73,7 @@ const subtasks = ref<ICheckbox[]>([{
     &--item {
       font-size: 13px;
       line-height: 23px;
-      color: #828FA3;
+      color: var(--color-grey-medium);
       text-align: center;
 
       & p {

@@ -45,20 +45,12 @@ const onInput = ({ target }: any) => {
 
 <style scoped lang="scss">
 h4 {
-  color: #828FA3;
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 16px;
+  @apply text-greyMedium text-12 font-bold mb-16;
 }
 
 .checkbox {
-  display: block;
-  background-color: #F4F7FD;
-  border-radius: 4px;
-  padding: 12px;
-  font-weight: 700;
-  margin-bottom: 8px;
   transition: background-color 0.5s ease;
+  @apply block bg-greyLight rounded-[4px] p-12 font-bold mb-8;
 
   &:hover {
     background-color: rgba(99, 95, 199, .25);
@@ -66,7 +58,7 @@ h4 {
   }
 
   &__input {
-    margin-right: 16px;
+    margin-right: var(--space-16);
   }
 
   .checked {

@@ -54,13 +54,13 @@ const color = computed<string>(() => {
     font-size: 13px;
     line-height: 23px;
     margin-bottom: 8px;
-    color: #828FA3;
+    color: var(--color-grey-medium);
 
     &--item {
       margin-right: 16px;
 
       &.font-weight {
-        color: #000112;
+        color: var(--color-black);
       }
     }
   }

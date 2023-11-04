@@ -21,7 +21,7 @@ const { number, title } = defineProps<{ number: string, title: string }>()
 
     &--number {
       margin-right: 16px;
-      color: #635FC7;
+      color: var(--color-purple-main);
     }
   }
 }

@@ -1,8 +1,7 @@
 <template>
   <div class="playground">
     <div class="playground__header">
-      <NuxtIcon class="playground__header--logo-icon" name="logo-light" filled />
-      <NuxtIcon class="playground__header--title-icon" name="title" filled />
+      <Logo />
       <span class="playground__header--text">Design System</span>
     </div>
 
@@ -13,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+import Logo from '@/components/Logo.vue'
 import Colors from "~/components/design-system/Colors.vue"
 import Typography from "~/components/design-system/Typography.vue"
 import InteractiveElements from "~/components/design-system/InteractiveElements.vue"
@@ -26,17 +26,6 @@ import InteractiveElements from "~/components/design-system/InteractiveElements.
 
   &__header {
     display: flex;
-
-    &--logo-icon {
-      margin-right: 16px;
-    } 
-    
-    &--title-icon {
-      :deep(svg) {
-        width: unset;
-        height: unset;
-      }
-    }
     
     &--text {
       flex-grow: 1;

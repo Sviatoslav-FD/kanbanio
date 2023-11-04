@@ -36,7 +36,7 @@ const Colors: IColor[] = [
 
     &--number {
       margin-right: 16px;
-      color: #635FC7;
+      color: var(--color-purple-main);
     }
   }
   

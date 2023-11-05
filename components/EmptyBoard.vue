@@ -1,9 +1,22 @@
 <script setup lang="ts">
+import { ref, computed } from "vue";
 import Button from "@/components/shared/Button.vue";
+import Modal from "@/components/shared/Modal.vue";
+
+const isModalOpen = ref(false);
 
 const onAddNewTask = () => {
-  console.log("Add New Task");
+  isModalOpen.value = true;
 };
+
+const closeModal = () => {
+  isModalOpen.value = false;
+  console.log("closeModal", isModalOpen.value);
+};
+
+const background = computed(() => {
+  return "#" + (((1 << 24) * Math.random()) | 0).toString(16);
+});
 </script>
 
 <template>
@@ -16,6 +29,12 @@ const onAddNewTask = () => {
         Add New Column
       </Button>
     </div>
+    <Modal v-if="isModalOpen" @close="closeModal">
+      <template #title>Add new column</template>
+      <div class="mt-24">
+        <div class="w-4 h-4 bg-black rounded-full" :style="{ background }" />
+      </div>
+    </Modal>
   </div>
 </template>
 

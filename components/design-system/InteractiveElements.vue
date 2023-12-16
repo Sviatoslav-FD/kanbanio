@@ -1,57 +1,53 @@
 <template>
-  <DesingSystemWrapper class="interactive" number="03" title="Interactive Elements">
+  <DesingSystemWrapper
+    class="interactive"
+    number="03"
+    title="Interactive Elements"
+  >
     <p class="interactive__title">Light Version</p>
 
     <div class="interactive__buttons">
-      <Button>
-        Button Primary (L)
-      </Button>
+      <AppButton> AppButton Primary (L) </AppButton>
 
-      <Button type="PrimaryS" size="S">
-        Button Primary (S)
-      </Button>
+      <AppButton type="PrimaryS" size="S"> AppButton Primary (S) </AppButton>
 
-      <Button type="Secondary" size="S">
-        Button Secondary
-      </Button>
+      <AppButton type="Secondary" size="S"> AppButton Secondary </AppButton>
 
-      <Button type="Destructive" size="S">
-        Button Destructive
-      </Button>
+      <AppButton type="Destructive" size="S"> AppButton Destructive </AppButton>
     </div>
 
     <div class="interactive__inputs">
       <div class="interactive__inputs--checkbox">
-        <Checkbox
+        <AppCheckbox
           title="Subtask Checkbox"
           :items="subtasks"
           @update:items="subtasks = $event"
         />
       </div>
 
-      <div class="interactive__inputs--checkbox">
-      </div>
+      <div class="interactive__inputs--checkbox"></div>
     </div>
   </DesingSystemWrapper>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ICheckbox } from '@/types'
+import { ref } from "vue";
+import { ICheckbox } from "@/types";
 
-import DesingSystemWrapper from "@/components/design-system/DesignSystemWrapper.vue"
-import Button from "@/components/shared/Button.vue"
-import Checkbox from "@/components/shared/Checkbox.vue"
+import DesingSystemWrapper from "@/components/design-system/DesignSystemWrapper.vue";
 
-const subtasks = ref<ICheckbox[]>([{
-  id: 0,
-  text: 'Idle',
-  value: false
-}, {
-  id: 1,
-  text: 'Completed',
-  value: true
-}])
+const subtasks = ref<ICheckbox[]>([
+  {
+    id: 0,
+    text: "Idle",
+    value: false,
+  },
+  {
+    id: 1,
+    text: "Completed",
+    value: true,
+  },
+]);
 </script>
 
 <style scoped lang="scss">

@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-const { mode } = defineProps<{ mode?: 'light' | 'dark' }>()
+const { mode } = defineProps<{ mode?: "light" | "dark" }>();
 </script>
 
 <style scoped lang="scss">

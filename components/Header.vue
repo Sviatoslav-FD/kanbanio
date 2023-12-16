@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Logo from "@/components/Logo.vue";
-import Button from "@/components/shared/Button.vue";
 //@ts-ignore
 import { useSidebar } from "@/composables";
 const { isSidebarVisible } = useSidebar();
@@ -16,7 +15,7 @@ const onAddNewTask = () => {
 
     <p class="header__text">Platform Launch</p>
 
-    <Button @click="onAddNewTask"> Add New Task </Button>
+    <AppButton @click="onAddNewTask"> Add New Task </AppButton>
   </div>
 </template>
 

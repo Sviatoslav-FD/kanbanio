@@ -1,3 +1,30 @@
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+
+import Logo from "@/components/Logo.vue";
+//@ts-ignore
+import { useSidebar } from "@/composables";
+const { menuItems, onToggleSidebar, onRouteChange, onMenuItemClick } =
+  useSidebar();
+
+onMounted(() => {
+  onRouteChange();
+});
+
+const theme = false;
+const modalRef = ref(null);
+const inputRef = ref(null);
+const newBoardName = ref("");
+
+function openBoardCreateModal(): void {
+  modalRef.value?.toggleModal();
+}
+
+function onAddBoard(): void {
+  console.log("onAddBoard");
+}
+</script>
+
 <template>
   <div class="sidebar">
     <div class="sidebar__header">
@@ -22,16 +49,16 @@
       <div
         tabindex="1"
         class="sidebar__boards--item new"
-        @click="onMenuItemClick('createNewBoard')"
+        @click="openBoardCreateModal"
       >
         <NuxtIcon class="icon" name="icon-board" />
-        <p class="name">Create New Board</p>
+        <p class="name">Add New Board</p>
       </div>
     </div>
 
     <div class="sidebar__footer">
       <div class="sidebar__footer--theme">
-        <Check v-model="theme" />
+        <AppCheck v-model="theme" />
       </div>
 
       <button class="sidebar__footer--button-hide" @click="onToggleSidebar">
@@ -39,23 +66,23 @@
         <span class="sidebar__footer--button-hide text">Hide Sidebar</span>
       </button>
     </div>
+
+    <AppModal ref="modalRef">
+      <template #title>Create New Board</template>
+      <AppInput
+        ref="inputRef"
+        title="Name"
+        v-model="newBoardName"
+        placeholder="Board name"
+        mounted-focus
+        class="mt-24"
+      />
+      <AppButton class="w-full mx-auto mt-32" @click="onAddBoard">
+        Add New Board
+      </AppButton>
+    </AppModal>
   </div>
 </template>
-
-<script setup lang="ts">
-import { onMounted } from "vue";
-
-import Logo from "@/components/Logo.vue";
-import Check from "@/components/shared/Check.vue";
-//@ts-ignore
-import { useSidebar } from "@/composables";
-const { menuItems, onToggleSidebar, onRouteChange, onMenuItemClick } =
-  useSidebar();
-
-onMounted(() => onRouteChange());
-
-const theme = false;
-</script>
 
 <style scoped lang="scss">
 .sidebar {

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <Transition name="slide">      
+    <Transition name="slide">
       <Sidebar v-if="isSidebarVisible" />
     </Transition>
 
@@ -9,25 +9,23 @@
       <slot />
     </div>
 
-    <Button
+    <AppButton
       v-show="!isSidebarVisible"
       class="wrapper__button-sidebar"
       padding="16px 20px"
       @click="onToggleSidebar"
     >
       <NuxtIcon name="icon-show-sidebar" />
-    </Button>
+    </AppButton>
   </div>
 </template>
 
 <script setup lang="ts">
-import Header from '@/components/Header.vue'
-import Sidebar from '@/components/Sidebar.vue'
-import Button from "@/components/shared/Button.vue"
+import Header from "@/components/Header.vue";
+import Sidebar from "@/components/Sidebar.vue";
 
-import { useSidebar } from '@/composables'
-const { isSidebarVisible, onToggleSidebar } = useSidebar()
-
+import { useSidebar } from "@/composables";
+const { isSidebarVisible, onToggleSidebar } = useSidebar();
 </script>
 
 <style scoped lang="scss">

@@ -47,7 +47,7 @@ function onAddColumn(): void {
 </script>
 
 <template>
-  <div id="test">
+  <div>
     <p class="mb-1 text-12 text-greyMedium">{{ props.title }}</p>
 
     <div v-for="{ id, text } in list" :key="id" class="flex items-center">

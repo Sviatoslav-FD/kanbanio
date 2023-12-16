@@ -1,23 +1,18 @@
-<template>
-  <div class="button" :class="[buttonColor, buttonSize]">
-    <slot />
-  </div>
-</template>
-
 <script setup lang="ts">
 import { computed } from "vue";
 //@ts-ignore
 import { TButtonType, TButtonSize } from "@/types";
 
-const { type, size, padding } = defineProps<{
+const { type, size, padding, disabled } = defineProps<{
   type?: TButtonType;
   size?: TButtonSize;
   padding?: string;
+  disabled?: boolean;
 }>();
 
 const buttonColor = computed<string>(() => {
   if (type === "Secondary") {
-    return "bg-[#635FC71A]";
+    return "bg-[#635FC71A] text-purpleMain";
   } else if (type === "Destructive") {
     return "bg-red text-white";
   } else {
@@ -32,12 +27,28 @@ const buttonSize = computed<string>(() => {
 });
 </script>
 
+<template>
+  <button
+    class="button rounded-[24px] font-bold text-[15px] leading-[19px] cursor-pointer text-center"
+    :class="[buttonColor, buttonSize]"
+    :disabled="disabled"
+  >
+    <slot />
+  </button>
+</template>
+
 <style scoped lang="scss">
 .button {
-  @apply w-fit rounded-[24px] font-bold text-[15px] leading-[19px] cursor-pointer;
-
   &:hover {
     opacity: 0.8;
+  }
+
+  &:disabled {
+    @apply bg-greyLight text-greyMedium cursor-not-allowed;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 </style>

@@ -21,7 +21,7 @@ defineExpose({
     style="background-color: rgba(0, 0, 0, 0.5)"
     @click.self="toggleModal"
   >
-    <div class="max-w-full p-32 bg-white rounded-md w-96">
+    <div class="max-w-full p-32 bg-white rounded-md w-[480px]">
       <div class="text-[18px] font-bold">
         <slot name="title" />
       </div>

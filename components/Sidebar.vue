@@ -75,8 +75,11 @@ function onAddBoard(): void {
         v-model="newBoardName"
         placeholder="Board name"
         mounted-focus
-        class="mt-24"
+        class="my-24"
       />
+
+      <AppInputGroup title="Columns" />
+
       <AppButton class="w-full mx-auto mt-32" @click="onAddBoard">
         Add New Board
       </AppButton>

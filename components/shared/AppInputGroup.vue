@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref, computed, nextTick } from "vue";
+import { ref, computed, nextTick, watchEffect } from "vue";
+//@ts-ignore
+import { uniqueId } from "@/helpers";
 
 interface AppColorPickerItem {
-  id: number;
+  id: string;
   text: string;
 }
 
@@ -14,34 +16,43 @@ const props = withDefaults(defineProps<InputGroupProps>(), {
   title: "",
 });
 
-const list = ref<AppColorPickerItem[]>([{ id: 1, text: "Todo" }]);
+const list = ref<AppColorPickerItem[]>([{ id: uniqueId(), text: "" }]);
 
 const hasEmptyItems = computed(() =>
   Boolean(list.value.filter((i) => !i.text).length)
 );
 
-function onInputEnter(text: string): void {
-  if (list.value.length < 2 && text.trim()) {
-    list.value.push({ id: list.value.length + 1, text: "" });
+const emit = defineEmits(["update:list"]);
+watchEffect(() =>
+  emit(
+    "update:list",
+    list.value.filter((i) => i.text)
+  )
+);
 
-    nextTick(() => {
-      const nextInputElement: HTMLInputElement = document.querySelector(
-        `#input-group-${list.value.length} input`
-      );
-      nextInputElement.focus();
-    });
-  }
+function onInputEnter(id: string): void {
+  addNewColumn();
+
+  nextTick(() => {
+    const element: HTMLInputElement = document.querySelector(
+      `#input-group-${id}`
+    );
+    const nextElInput = (
+      element.parentNode.nextSibling as HTMLElement
+    ).querySelector("input");
+    nextElInput.focus();
+  });
 }
 
-function onRemoveItem(id: number): void {
+function onRemoveItem(id: string): void {
   if (list.value.length > 1) {
     list.value = list.value.filter((i) => i.id !== id);
   }
 }
 
-function onAddColumn(): void {
+function addNewColumn(): void {
   if (!hasEmptyItems.value) {
-    list.value.push({ id: list.value.length + 1, text: "" });
+    list.value.push({ id: uniqueId(), text: "" });
   }
 }
 </script>
@@ -50,12 +61,17 @@ function onAddColumn(): void {
   <div>
     <p class="mb-1 text-12 text-greyMedium">{{ props.title }}</p>
 
-    <div v-for="{ id, text } in list" :key="id" class="flex items-center">
+    <div
+      v-for="({ id, text }, index) in list"
+      :key="id"
+      class="flex items-center"
+    >
       <AppInput
         :model-value="text"
         :id="`input-group-${id}`"
         class="flex-1 mb-8"
-        @keypress.enter="onInputEnter(text)"
+        @keypress.enter="onInputEnter(id)"
+        @update:model-value="(v) => (list[index].text = v)"
       />
 
       <AppColorPicker class="mx-8" />
@@ -68,10 +84,10 @@ function onAddColumn(): void {
     </div>
 
     <AppButton
-      type="Secondary"
       class="w-full"
-      @click="onAddColumn"
+      type="Secondary"
       :disabled="hasEmptyItems"
+      @click="addNewColumn"
     >
       Add New Column
     </AppButton>

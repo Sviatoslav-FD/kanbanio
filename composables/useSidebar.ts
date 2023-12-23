@@ -2,7 +2,7 @@ import { ref } from "vue";
 
 const isSidebarVisible = ref<boolean>(true);
 
-const menuItems = ref<any>([
+const boards = ref<any>([
   {
     id: "1",
     name: "Platform Launch",
@@ -34,10 +34,10 @@ export function useSidebar() {
     if ("projectId" in currentRoute.query) {
       onMenuItemClick(currentRoute.query.projectId);
     } else {
-      menuItems.value[0].active = true;
+      boards.value[0].active = true;
       router.replace({
         path: currentRoute.fullPath,
-        query: { projectId: menuItems.value[0].id },
+        query: { projectId: boards.value[0].id },
       });
     }
   };
@@ -47,7 +47,7 @@ export function useSidebar() {
       console.log("Create New Board");
     }
 
-    menuItems.value.map((item: any) => {
+    boards.value.map((item: any) => {
       if (item.id === id) {
         item.active = true;
 
@@ -59,11 +59,16 @@ export function useSidebar() {
     });
   };
 
+  const addNewBoard = (board) => {
+    boards.value.push(board);
+  };
+
   return {
     isSidebarVisible,
-    menuItems,
+    boards,
     onToggleSidebar,
     onRouteChange,
     onMenuItemClick,
+    addNewBoard,
   };
 }

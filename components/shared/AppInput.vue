@@ -49,6 +49,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .input {
   border-color: rgba(130, 143, 163, 0.25);
+  caret-color: #635fc7;
 
   &::placeholder {
     color: rgba(130, 143, 163, 0.25);

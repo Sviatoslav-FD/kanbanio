@@ -162,7 +162,7 @@ function selectColor(color: string): void {
 <template>
   <div class="relative">
     <div
-      class="w-4 h-4 border border-solid rounded-full shadow-inner border-greyLight"
+      class="w-4 h-4 border border-solid rounded-full shadow-inner cursor-pointer border-greyLight"
       :style="{ background }"
       @click="togglePalette"
     />

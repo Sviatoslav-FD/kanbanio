@@ -14,11 +14,11 @@ const background = computed(() => {
 
 <template>
   <div class="flex items-center justify-center h-full bg-greyLight">
-    <div>
+    <div class="text-center">
       <p class="text-greyMedium">
         This board is empty. Create a new column to get started.
       </p>
-      <AppButton class="mx-auto mt-32" @click="onAddNewTask">
+      <AppButton class="mt-32" @click="onAddNewTask">
         Add New Column
       </AppButton>
     </div>

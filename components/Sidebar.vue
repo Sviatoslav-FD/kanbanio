@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 
+//@ts-ignore
 import Logo from "@/components/Logo.vue";
 //@ts-ignore
+import AddBoardModal from "@/components/modals/AddBoardModal.vue";
+//@ts-ignore
 import { useSidebar } from "@/composables";
-const { menuItems, onToggleSidebar, onRouteChange, onMenuItemClick } =
+const { boards, onToggleSidebar, onRouteChange, onMenuItemClick } =
   useSidebar();
 
 onMounted(() => {
@@ -12,16 +15,10 @@ onMounted(() => {
 });
 
 const theme = false;
-const modalRef = ref(null);
-const inputRef = ref(null);
-const newBoardName = ref("");
+const addBoardModalRef = ref(null);
 
-function openBoardCreateModal(): void {
-  modalRef.value?.toggleModal();
-}
-
-function onAddBoard(): void {
-  console.log("onAddBoard");
+function toggleBoardCreateModal(): void {
+  addBoardModalRef.value?.toggleBoardCreateModal();
 }
 </script>
 
@@ -31,11 +28,11 @@ function onAddBoard(): void {
       <Logo class="sidebar__header--logo" />
     </div>
 
-    <h5>ALL BOARDS (3)</h5>
+    <h5>{{ `ALL BOARDS (${boards?.length})` }}</h5>
 
     <div class="sidebar__boards">
       <div
-        v-for="item in menuItems"
+        v-for="item in boards"
         :key="item.id"
         tabindex="1"
         class="sidebar__boards--item"
@@ -49,7 +46,7 @@ function onAddBoard(): void {
       <div
         tabindex="1"
         class="sidebar__boards--item new"
-        @click="openBoardCreateModal"
+        @click="toggleBoardCreateModal"
       >
         <NuxtIcon class="icon" name="icon-board" />
         <p class="name">Add New Board</p>
@@ -67,23 +64,7 @@ function onAddBoard(): void {
       </button>
     </div>
 
-    <AppModal ref="modalRef">
-      <template #title>Create New Board</template>
-      <AppInput
-        ref="inputRef"
-        title="Name"
-        v-model="newBoardName"
-        placeholder="Board name"
-        mounted-focus
-        class="my-24"
-      />
-
-      <AppInputGroup title="Columns" />
-
-      <AppButton class="w-full mx-auto mt-32" @click="onAddBoard">
-        Add New Board
-      </AppButton>
-    </AppModal>
+    <AddBoardModal ref="addBoardModalRef" />
   </div>
 </template>
 
@@ -108,7 +89,7 @@ function onAddBoard(): void {
       }
 
       &.new {
-        @apply text-purpleMain;
+        @apply text-purpleMain hover:bg-greyLight rounded-br-full rounded-tr-full;
       }
 
       .icon {

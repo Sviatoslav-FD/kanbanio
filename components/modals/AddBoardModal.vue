@@ -6,17 +6,18 @@ import { useSidebar } from "@/composables";
 import { uniqueId } from "@/helpers";
 const { addNewBoard } = useSidebar();
 
-const modalRef = ref(null);
+const modalRef = ref<HTMLElement | null>(null);
 const inputRef = ref(null);
 const inputGroupRef = ref(null);
 const newBoardName = ref("");
 const columns = ref(null);
 
-const disabled = computed<Boolean>(() => {
-  return !(columns.value?.length && newBoardName.value.trim());
+const disabled = computed<boolean>(() => {
+  return !newBoardName.value.trim();
 });
 
 function toggleBoardCreateModal(): void {
+  //@ts-ignore
   modalRef.value?.toggleModal();
 }
 

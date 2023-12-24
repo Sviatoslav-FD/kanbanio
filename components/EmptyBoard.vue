@@ -4,6 +4,7 @@ import { ref, computed } from "vue";
 const modalRef = ref(null);
 
 const onAddNewTask = () => {
+  //@ts-ignore
   modalRef.value.toggleModal();
 };
 

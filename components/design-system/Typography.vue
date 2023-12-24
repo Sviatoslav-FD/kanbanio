@@ -15,7 +15,7 @@
 import DesingSystemWrapper from "~/components/design-system/DesignSystemWrapper.vue"
 import TypographyItem from "~/components/design-system/TypographyItem.vue"
 
-import { ITypography } from "~/types/index"
+import { ITypography } from "@/types/index"
 
 const typographyBold: ITypography[] = [{
   fontFamily: "Plus Jakarta Sans",

@@ -59,7 +59,7 @@ export function useSidebar() {
     });
   };
 
-  const addNewBoard = (board) => {
+  const addNewBoard = (board: any) => {
     boards.value.push(board);
   };
 

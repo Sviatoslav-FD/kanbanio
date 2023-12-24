@@ -18,6 +18,7 @@ const theme = false;
 const addBoardModalRef = ref(null);
 
 function toggleBoardCreateModal(): void {
+  //@ts-ignore
   addBoardModalRef.value?.toggleBoardCreateModal();
 }
 </script>

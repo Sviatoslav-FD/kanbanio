@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, computed, nextTick, watchEffect } from "vue";
-//@ts-ignore
 import { uniqueId } from "@/helpers";
 
 interface AppColorPickerItem {
@@ -34,13 +33,13 @@ function onInputEnter(id: string): void {
   addNewColumn();
 
   nextTick(() => {
-    const element: HTMLInputElement = document.querySelector(
+    const element: HTMLInputElement | null = document.querySelector(
       `#input-group-${id}`
     );
     const nextElInput = (
-      element.parentNode.nextSibling as HTMLElement
+      element?.parentNode?.nextSibling as HTMLElement
     ).querySelector("input");
-    nextElInput.focus();
+    nextElInput?.focus();
   });
 }
 
@@ -61,34 +60,16 @@ function addNewColumn(): void {
   <div>
     <p class="mb-1 text-12 text-greyMedium">{{ props.title }}</p>
 
-    <div
-      v-for="({ id, text }, index) in list"
-      :key="id"
-      class="flex items-center"
-    >
-      <AppInput
-        :model-value="text"
-        :id="`input-group-${id}`"
-        class="flex-1 mb-8"
-        @keypress.enter="onInputEnter(id)"
-        @update:model-value="(v) => (list[index].text = v)"
-      />
+    <div v-for="({ id, text }, index) in list" :key="id" class="flex items-center">
+      <AppInput :model-value="text" :id="`input-group-${id}`" class="flex-1 mb-8" @keypress.enter="onInputEnter(id)"
+        @update:model-value="(v) => (list[index].text = v)" />
 
       <AppColorPicker class="mx-8" />
 
-      <NuxtIcon
-        class="cursor-pointer icon"
-        name="icon-cross"
-        @click="onRemoveItem(id)"
-      />
+      <NuxtIcon class="cursor-pointer icon" name="icon-cross" @click="onRemoveItem(id)" />
     </div>
 
-    <AppButton
-      class="w-full"
-      type="Secondary"
-      :disabled="hasEmptyItems"
-      @click="addNewColumn"
-    >
+    <AppButton class="w-full" type="Secondary" :disabled="hasEmptyItems" @click="addNewColumn">
       Add New Column
     </AppButton>
   </div>

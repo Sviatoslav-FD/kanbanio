@@ -21,6 +21,7 @@ const props = withDefaults(defineProps<InputProps>(), {
 const inputRef = ref(null);
 
 function focus(): void {
+  //@ts-ignore
   inputRef.value?.focus();
 }
 

@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { computed } from "vue"
 
-import { ITypography } from "~/types/index"
+import { ITypography } from "@/types/index"
 
 const { item } = defineProps<{ item: ITypography }>()
 

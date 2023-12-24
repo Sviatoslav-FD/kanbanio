@@ -2,7 +2,7 @@
 import { ref, computed } from "vue";
 
 const isPaletteVisible = ref(false);
-const selectedColor = ref(null);
+const selectedColor = ref<string | null>(null);
 const colorPalette = [
   ["Maroon", "#800000"],
   ["DarkRed", "#8B0000"],
